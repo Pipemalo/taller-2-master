@@ -33,12 +33,10 @@ export class LoginPage {
 
   disableAuthenticatedMenu(){
     this.menuCtrl.enable(false, 'authenticated');
-    this.menuCtrl.enable(true, 'unauthenticated');
   }
 
   enableAuthenticatedMenu() {
     this.menuCtrl.enable(true, 'authenticated');
-    this.menuCtrl.enable(false, 'unauthenticated');
   }
 
   loginUser(): void {
