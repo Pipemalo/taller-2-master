@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Chart } from 'chart.js';
 
 import * as stat from "simple-statistics";
 import * as math from "mathjs";
@@ -18,6 +19,26 @@ export class BernoulliPage {
   public res_text: String;
   public visible: Boolean;
   public buttonDisabled = false;
+
+  public barChartOptions:any = {
+    scaleShowVerticalLines: false,
+    scaleStartValue: 0,
+    scales:{
+      yAxes: [{
+        ticks: {
+          beginAtZero: true,
+          min: 0,
+          max: 1
+      }
+    }]
+  }
+  };
+
+  public barChartData:any[] = [
+    {data: [1], label: 'Fracaso'},
+    {data: [1], label: 'Exito'}
+  ];
+  public barChartLabels:string[] = ['Bernoulli'];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, public alertCtrl: AlertController) {
     this.prueba = formBuilder.group({
@@ -45,6 +66,7 @@ export class BernoulliPage {
       this.visible = true;
       this.res_text = "<p>$p: " + parseFloat(this.bernoulli[1]).toFixed(3) + "$</p><p>$q: " +  parseFloat(this.bernoulli[0]).toFixed(3) + "$</p>";
       this.buttonDisabled = true;
+      this.barChartData = [{data: [this.bernoulli[0].toFixed(3)], label: 'Fracaso'}, {data: [this.bernoulli[1].toFixed(3)], label: 'Exito'}];
     }
   }
 
@@ -53,6 +75,5 @@ export class BernoulliPage {
     this.buttonDisabled = false;
     this.visible = false;
     this.res_text = null;
-  }
-  
+  } 
 }
