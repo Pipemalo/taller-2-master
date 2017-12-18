@@ -30,14 +30,14 @@ export class PoissonPage {
           beginAtZero: true,
           min: 0,
           max: 100
-        }
-      }]
-    }
+      }
+    }]
+  }
   };
 
   public barChartData:any[] = [
-  {data: [1], label: 'Fracaso'},
-  {data: [1], label: 'Exito'}
+    {data: [1], label: 'Fracaso'},
+    {data: [1], label: 'Exito'}
   ];
   public barChartLabels:string[] = ['Poisson'];
 
@@ -77,7 +77,7 @@ export class PoissonPage {
         suma.push(flag);
       }
       if(poisson >= 0){
-        var exitoPoisson = poisson * 100;
+        var exitoPoisson = 50;
         var fracasoPoisson = 100 - exitoPoisson;
         this.visible = true;
         this.res_text = "<p>$p(X= " + x + ")=" + poisson.toFixed(3) + "$</p><p>$p(X\\leq" + x + ")=" + (stat.sumSimple(suma)).toFixed(3) + "$</p><p>$E(X)=" + lambda.toFixed(3) + "$</p><p>$V(X)="+ lambda.toFixed(3) + "$</p>";

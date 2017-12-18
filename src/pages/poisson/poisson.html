@@ -61,11 +61,11 @@
     <p>&nbsp;</p>
   </ion-card-content>
 
-  <ion-item item-divider color="home-navbar" *ngIf="visible"> 
+  <ion-item item-divider color="home-navbar"> 
     Grafico
   </ion-item>
 
-  <ion-card-content *ngIf="visible">
+  <ion-card-content>
     <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [chartType]="'bar'"></canvas>
   </ion-card-content>
 
@@ -76,9 +76,8 @@
   <ion-card-content>
     <iframe width="560" height="315" src="https://www.youtube.com/embed/y_dOx8FhHpQ" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
   </ion-card-content>
-    <p style="text-align: center; color: grey;"><small>&copy; 2017 | Universidad de Playa Ancha de Ciencias de la Educación</small></p>
-    <img src="assets/imgs/Lab[e]saM.png">
-    <br>
-    <br>
-  </ion-content>
-
+  <p style="text-align: center; color: grey;"><small>&copy; 2017 | Universidad de Playa Ancha de Ciencias de la Educación</small></p>
+  <img src="assets/imgs/Lab[e]saM.png">
+  <br>
+  <br>
+</ion-content>
