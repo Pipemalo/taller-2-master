@@ -77,7 +77,7 @@ export class PoissonPage {
         suma.push(flag);
       }
       if(poisson >= 0){
-        var exitoPoisson = 50;
+        var exitoPoisson = poisson * 100;
         var fracasoPoisson = 100 - exitoPoisson;
         this.visible = true;
         this.res_text = "<p>$p(X= " + x + ")=" + poisson.toFixed(3) + "$</p><p>$p(X\\leq" + x + ")=" + (stat.sumSimple(suma)).toFixed(3) + "$</p><p>$E(X)=" + lambda.toFixed(3) + "$</p><p>$V(X)="+ lambda.toFixed(3) + "$</p>";

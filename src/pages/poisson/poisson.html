@@ -61,11 +61,10 @@
     <p>&nbsp;</p>
   </ion-card-content>
 
-  <ion-item item-divider color="home-navbar"> 
+  <ion-item item-divider color="home-navbar" *ngIf="visible"> 
     Grafico
   </ion-item>
-
-  <ion-card-content>
+  <ion-card-content *ngIf="visible">
     <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [chartType]="'bar'"></canvas>
   </ion-card-content>
 
