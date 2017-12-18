@@ -82,7 +82,7 @@ export class BinomialPage {
       var EX = n * p;
       var VX = n * p * (1 - p);
 
-      var exitoBinomial = binomial.toFixed(3) * 100;
+      var exitoBinomial = binomial * 100;
       var fracasoBinomial = 100 - exitoBinomial;
 
       if(binomial >= 0 && n>=0 && p >= 0 && x >= 0 && p <= 1 && x <= n){
