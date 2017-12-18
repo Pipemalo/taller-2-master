@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Chart } from 'chart.js';
+
 import * as stat from "simple-statistics";
 import * as math from "mathjs";
 
@@ -11,7 +13,7 @@ import * as math from "mathjs";
 export class HipergeometricaPage {
   public prueba;
   public visible: Boolean;
-  public def_text : String ;
+  public def_text : String;
   public par_text: String;
   public res_text: String;
   public text6: String;
@@ -19,6 +21,26 @@ export class HipergeometricaPage {
   public text8: String;
   public text9: String;
   public buttonDisabled = false;
+
+  public barChartOptions:any = {
+    scaleShowVerticalLines: false,
+    scaleStartValue: 0,
+    scales:{
+      yAxes: [{
+        ticks: {
+          beginAtZero: true,
+          min: 0,
+          max: 100
+        }
+      }]
+    }
+  };
+
+  public barChartData:any[] = [
+  {data: [1], label: 'Fracaso'},
+  {data: [1], label: 'Exito'}
+  ];
+  public barChartLabels:string[] = ['Hipergeometrica'];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, public alertCtrl: AlertController) {
     this.prueba = formBuilder.group({
@@ -62,15 +84,18 @@ export class HipergeometricaPage {
         suma.push(flag);
       }
       if(hipergeometrica>=0){
+        var hipergeometricaExito = hipergeometrica * 100;
+        var hipergeometricaFracaso = 100 - hipergeometricaExito;
         this.visible = true;
         this.res_text = "<p>$p(X= " + x + ")=" + hipergeometrica.toFixed(3) + "$</p><p>$p(X\\leq" + x + ")=" + (stat.sumSimple(suma)).toFixed(3) + "$</p>";
+        this.barChartData = [{data: [hipergeometricaFracaso], label: 'Fracaso'}, {data: [hipergeometricaExito], label: 'Exito'}];
         this.buttonDisabled = true;
       }
     }else{
       this.visible = false;
       let alert = this.alertCtrl.create({
         title: "Error de Cálculo",
-        message: 'Verifique que los parametrós ingresados sean coherentes para realizar el cálculo',
+        message: 'Verifique que los parámetros ingresados sean coherentes para realizar el cálculo',
         buttons: ['OK']
       });
       alert.present();
