@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Chart } from 'chart.js';
 import * as jstat from "jStat";
 import * as stat from "simple-statistics";
 
@@ -18,6 +19,26 @@ export class PoissonPage {
   public text6: String;
   public text7: String;
   public buttonDisabled = false;
+
+  public barChartOptions:any = {
+    scaleShowVerticalLines: false,
+    scaleStartValue: 0,
+    scales:{
+      yAxes: [{
+        ticks: {
+          beginAtZero: true,
+          min: 0,
+          max: 100
+        }
+      }]
+    }
+  };
+
+  public barChartData:any[] = [
+  {data: [1], label: 'Fracaso'},
+  {data: [1], label: 'Exito'}
+  ];
+  public barChartLabels:string[] = ['Poisson'];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, public alertCtrl: AlertController) {
     this.prueba = formBuilder.group({
@@ -55,8 +76,11 @@ export class PoissonPage {
         suma.push(flag);
       }
       if(poisson >= 0){
+        var exitoPoisson = poisson * 100;
+        var fracasoPoisson = 100 - exitoPoisson;
         this.visible = true;
         this.res_text = "<p>$p(X= " + x + ")=" + poisson.toFixed(3) + "$</p><p>$p(X\\leq" + x + ")=" + (stat.sumSimple(suma)).toFixed(3) + "$</p><p>$E(X)=" + lambda.toFixed(3) + "$</p><p>$V(X)="+ lambda.toFixed(3) + "$</p>";
+        this.barChartData = [{data: [fracasoPoisson], label: 'Fracaso'}, {data: [exitoPoisson], label: 'Exito'}];
         this.buttonDisabled = true;
       }
     }else{

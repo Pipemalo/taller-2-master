@@ -8,25 +8,25 @@
 </ion-header>
 
 <ion-content>
-    <ion-item item-divider color="home-cardTitle">
-      Definición
-    </ion-item>
+  <ion-item item-divider color="home-cardTitle">
+    Definición
+  </ion-item>
 
-    <ion-card-content [MathJax]="def_text" style="text-align: justify;">
-      {{def_text}}
-    </ion-card-content>
+  <ion-card-content [MathJax]="def_text" style="text-align: justify;">
+    {{def_text}}
+  </ion-card-content>
 
-    <ion-item item-divider color="home-cardTitle">
-      Parámetros
-    </ion-item>
-      <ion-card-content [MathJax]="par_text" style="text-align: justify;"> 
-        {{par_text}}
-      </ion-card-content>
+  <ion-item item-divider color="home-cardTitle">
+    Parámetros
+  </ion-item>
+  <ion-card-content [MathJax]="par_text" style="text-align: justify;"> 
+    {{par_text}}
+  </ion-card-content>
 
   <form [formGroup]="prueba" (submit)="poissonCalc()" validate>
 
     <ion-item item-divider color="home-cardTitle">
-        Calcular Distribución Poisson
+      Calcular Distribución Poisson
     </ion-item>
 
     <ion-item>
@@ -60,18 +60,24 @@
     {{res_text}}
     <p>&nbsp;</p>
   </ion-card-content>
+  <ion-item item-divider color="home-navbar" *ngIf="visible"> 
+    Grafico
+  </ion-item>
+  <ion-card-content *ngIf="visible">
+    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [chartType]="'bar'"></canvas>
+  </ion-card-content>
   <ion-item item.divider color="home-navbar">
     Videos
   </ion-item>
   <ion-card-content>
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/y_dOx8FhHpQ" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/y_dOx8FhHpQ" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
   </ion-card-content>
   
   <ion-content>
 
-  <p style="text-align: center; color: grey;"><small>&copy; 2017 | Universidad de Playa Ancha de Ciencias de la Educación</small></p>
-  <img src="assets/imgs/Lab[e]saM.png">
-  <br>
-  <br>
-</ion-content>
+    <p style="text-align: center; color: grey;"><small>&copy; 2017 | Universidad de Playa Ancha de Ciencias de la Educación</small></p>
+    <img src="assets/imgs/Lab[e]saM.png">
+    <br>
+    <br>
+  </ion-content>
 
