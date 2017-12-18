@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Chart } from 'chart.js';
 import * as stat from "simple-statistics";
 import * as math from "mathjs";
 
@@ -19,6 +20,26 @@ export class BinomialPage {
   public text4 = "";
   public text5 = "";
   public buttonDisabled = false;
+
+  public barChartOptions:any = {
+    scaleShowVerticalLines: false,
+    scaleStartValue: 0,
+    scales:{
+      yAxes: [{
+        ticks: {
+          beginAtZero: true,
+          min: 0,
+          max: 1
+      }
+    }]
+  }
+  };
+
+  public barChartData:any[] = [
+    {data: [1], label: 'Fracaso'},
+    {data: [1], label: 'Exito'}
+  ];
+  public barChartLabels:string[] = ['Binomial'];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, public alertCtrl: AlertController) {
     this.prueba = formBuilder.group({
@@ -61,10 +82,16 @@ export class BinomialPage {
       var EX = n * p;
       var VX = n * p * (1 - p);
 
+      var exitoBinomial = binomial.toFixed(3) * 100;
+      var fracasoBinomial = 100 - exitoBinomial;
+
       if(binomial >= 0 && n>=0 && p >= 0 && x >= 0 && p <= 1 && x <= n){
         this.visible = true;
         this.res_text = "<p>$p(X= " + x + ")=" + binomial.toFixed(3) + "$</p><p>$p(X\\leq" + x + ")=" + (stat.sumSimple(suma)).toFixed(3) + "$</p><p>$E(X)=" + EX.toFixed(3) + "$</p><p>$V(X)="+ VX.toFixed(3) + "$</p>";
+        
+        this.barChartData = [{data: [fracasoBinomial], label: 'Fracaso'}, {data: [exitoBinomial], label: 'Exito'}];
         this.buttonDisabled = true;
+
       }else{
         this.visible = false;
         let alert = this.alertCtrl.create({
