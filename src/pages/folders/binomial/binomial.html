@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Distr. de Bernoulli</ion-title>
+    <ion-title>Distribución Binomial</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -22,28 +22,42 @@
   <ion-card-content [MathJax]="par_text" style="text-align: justify;"> 
     {{par_text}}
   </ion-card-content>
-  <ion-item item-divider color="home-cardTitle">
-    Cálculo
-  </ion-item>
-  
-  <form [formGroup]="prueba" (submit)="bernoulliCalc()" novalidate>
-    <ion-item>
-      <ion-label stacked>Probabilidad de Éxito</ion-label>
-      <ion-input formControlName="p" type="number" [disabled]="buttonDisabled" inputmode="numeric" pattern="\d*" placeholder="Valor entre 0 y 1 inclusive" [(ngModel)]="p" name="p"></ion-input>
+
+  <form [formGroup]="prueba" (submit)="binomialCalc()" novalidate>
+
+    <ion-item item-divider color="home-cardTitle">
+      Calcular Distribución Binomial
     </ion-item>
+
+    <ion-item>
+      <ion-label stacked [MathJax]="text3" style="text-align: justify;">{{ text3 }}</ion-label>
+      <ion-input formControlName="binp" [disabled]="buttonDisabled" type="number" [(ngModel)]="binp" name="binp"></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label stacked [MathJax]="text4" style="text-align: justify;">{{ text4 }}</ion-label>
+      <ion-input formControlName="binn" [disabled]="buttonDisabled" type="number" [(ngModel)]="binn" name="binn"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked [MathJax]="text5" style="text-align: justify;">{{ text5 }}</ion-label>
+      <ion-input formControlName="binx" [disabled]="buttonDisabled" type="number" [(ngModel)]="binx" name="binx"></ion-input>
+    </ion-item>
+    
     <ion-grid>
       <ion-row>
         <ion-col>
           <button ion-button full type="submit" [disabled]="buttonDisabled" color="home-navbar">Calcular</button>
         </ion-col>
         <ion-col>
-          <button ion-button full type="reset" (click)="reset()" color="home-naranjo">Borrar</button>
+          <button ion-button full color="danger" (click)="reset()" type="reset" color="home-naranjo">Borrar</button>
         </ion-col>
       </ion-row>
     </ion-grid>
+
   </form>
 
-  <ion-item item-divider color="home-navbar" *ngIf="visible">
+  <ion-item item-divider color="home-cardTitle" *ngIf="visible">
     Resultados
   </ion-item>
   <ion-card-content *ngIf="visible" [MathJax]="res_text" style="text-align: justify;">
@@ -56,13 +70,7 @@
   <ion-card-content [hidden]="!visible">
     <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [chartType]="'bar'"></canvas>
   </ion-card-content>
-  <ion-item item-divider color="home-navbar">
-    Video
-  </ion-item>
-  <ion-card-content style="text-align:center"> 
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/WBSOTPM4BeY" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
-  </ion-card-content>
-  
+
   <p style="text-align: center; color: grey;"><small>&copy; 2017 | Universidad de Playa Ancha de Ciencias de la Educación</small></p>
   <img src="assets/imgs/Lab[e]saM.png">
   <br>
